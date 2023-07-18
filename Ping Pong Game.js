@@ -5,9 +5,9 @@ const ball = {
   x: can.width / 2,
   y: can.height / 2,
   radius: 10,
-  velX: 6.5,
-  velY: 6.5,
-  speed: 6.5,
+  velX: 7,
+  velY: 7,
+  speed: 7,
   color: "green"
 };
 
@@ -62,13 +62,22 @@ function drawSeparator() {
   }
 }
 
-function draw() {=
+function draw() {
+  // Clear the canvas
   drawRectangle(0, 0, can.width, can.height, "black");
+
+  // Draw the paddles
   drawRectangle(user.x, user.y, user.width, user.height, user.color);
   drawRectangle(cpu.x, cpu.y, cpu.width, cpu.height, cpu.color);
+
+  // Draw the ball
   drawCircle(ball.x, ball.y, ball.radius, ball.color);
+
+  // Draw the scores
   drawScore(user.score, can.width / 4, can.height / 5);
   drawScore(cpu.score, (3 * can.width) / 4, can.height / 5);
+
+  // Draw the separator
   drawSeparator();
 }
 
@@ -76,10 +85,12 @@ function update() {
   // Move the ball
   ball.x += ball.velX;
   ball.y += ball.velY;
+
   // Ball collision with walls
   if (ball.y + ball.radius > can.height || ball.y - ball.radius < 0) {
     ball.velY = -ball.velY;
   }
+
   // Ball collision with paddles
   if (ball.x - ball.radius < user.x + user.width && ball.y > user.y && ball.y < user.y + user.height) {
   	ball.velX = -ball.velX;
@@ -90,6 +101,7 @@ function update() {
   ) {
     ball.velX = -ball.velX;
   }
+
   // Update the score and reset the ball if there's a score
   if (ball.x - ball.radius < 0) {
     // Computer scores
@@ -130,7 +142,7 @@ document.addEventListener("keydown", function (e) {
     // Down arrow key
     user.y += 12;
   }
-  e.preventDefault();
+  key.preventDefault();
 });
 
 can.addEventListener("mousemove", movePaddle);
