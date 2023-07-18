@@ -62,7 +62,7 @@ function drawSeparator() {
   }
 }
 
-function draw() {
+function draw() {=
   drawRectangle(0, 0, can.width, can.height, "black");
   drawRectangle(user.x, user.y, user.width, user.height, user.color);
   drawRectangle(cpu.x, cpu.y, cpu.width, cpu.height, cpu.color);
@@ -76,12 +76,10 @@ function update() {
   // Move the ball
   ball.x += ball.velX;
   ball.y += ball.velY;
-
   // Ball collision with walls
   if (ball.y + ball.radius > can.height || ball.y - ball.radius < 0) {
     ball.velY = -ball.velY;
   }
-
   // Ball collision with paddles
   if (ball.x - ball.radius < user.x + user.width && ball.y > user.y && ball.y < user.y + user.height) {
   	ball.velX = -ball.velX;
@@ -92,7 +90,6 @@ function update() {
   ) {
     ball.velX = -ball.velX;
   }
-
   // Update the score and reset the ball if there's a score
   if (ball.x - ball.radius < 0) {
     // Computer scores
