@@ -5,9 +5,9 @@ const ball = {
   x: can.width / 2,
   y: can.height / 2,
   radius: 10,
-  velX: 5,
-  velY: 5,
-  speed: 5,
+  velX: 6.5,
+  velY: 6.5,
+  speed: 6.5,
   color: "green"
 };
 
@@ -63,21 +63,12 @@ function drawSeparator() {
 }
 
 function draw() {
-  // Clear the canvas
   drawRectangle(0, 0, can.width, can.height, "black");
-
-  // Draw the paddles
   drawRectangle(user.x, user.y, user.width, user.height, user.color);
   drawRectangle(cpu.x, cpu.y, cpu.width, cpu.height, cpu.color);
-
-  // Draw the ball
   drawCircle(ball.x, ball.y, ball.radius, ball.color);
-
-  // Draw the scores
   drawScore(user.score, can.width / 4, can.height / 5);
   drawScore(cpu.score, (3 * can.width) / 4, can.height / 5);
-
-  // Draw the separator
   drawSeparator();
 }
 
@@ -133,7 +124,18 @@ function movePaddle(e) {
   user.y = e.clientY - rect.top - user.height / 2;
 }
 
-// Event listener for paddle movement
+document.addEventListener("keydown", function (e) {
+  const key = e.keyCode;
+  if (key === 38) {
+    // Up arrow key
+    user.y -= 12;
+  } else if (key === 40) {
+    // Down arrow key
+    user.y += 12;
+  }
+  e.preventDefault();
+});
+
 can.addEventListener("mousemove", movePaddle);
 
 // Game loop
@@ -142,6 +144,4 @@ function gameLoop() {
   draw();
   requestAnimationFrame(gameLoop);
 }
-
-// Start the game loop
 gameLoop();
