@@ -5,9 +5,9 @@ const ball = {
   x: can.width / 2,
   y: can.height / 2,
   radius: 10,
-  velX: 10,
-  velY: 10,
-  speed: 10,
+  velX: 100,
+  velY: 100,
+  speed: 100,
   color: "green"
 };
 
